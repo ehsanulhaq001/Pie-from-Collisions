@@ -5,7 +5,7 @@ window.onload = function() {
     cnv.height = 300;
     cnv.style.backgroundColor = "black";
     start();
-}
+};
 
 function start() {
     setup();
@@ -13,20 +13,24 @@ function start() {
 }
 let block;
 let bounces;
-let digits;
+let digits = document.querySelector("#input").value;
 let bigMass;
 let subDivs;
-let bounceCount;
+let bounceCount = document.querySelector("#colValue");
 let pie = document.querySelector("#pieValue");
 
 function setup() {
     bounces = 0;
-    digits = document.querySelector("#input").value;;
-    bigMass = Math.pow(100, digits - 1)
-    subDivs = Math.pow(10, (digits < 8 ? digits - 1 : 7));
-    bounceCount = document.querySelector("#colValue");
+    digits = document.querySelector("#input").value;
+    bigMass = Math.pow(100, digits - 1);
+    subDivs = Math.pow(10, digits < 8 ? digits - 1 : 7);
     smallBlock = new Block(cnv.width / 2 - 100, 0, 0, 50, 1);
-    bigBlock = new Block(cnv.width / 2, smallBlock.size, -1 / subDivs, 50 + 20 * (digits - 1), bigMass);
+    bigBlock = new Block(
+        cnv.width / 2,
+        smallBlock.size, -1 / subDivs,
+        50 + 20 * (digits - 1),
+        bigMass
+    );
 }
 
 function draw() {
@@ -56,7 +60,7 @@ function run() {
     for (let index = 0; index < subDivs; index++) {
         bigBlock.update();
         smallBlock.update();
-        if (bigBlock.x <= (smallBlock.x + smallBlock.size)) {
+        if (bigBlock.x <= smallBlock.x + smallBlock.size) {
             bounce(bigBlock, smallBlock);
             bounces++;
         }
@@ -65,6 +69,10 @@ function run() {
 
 function bounce(block1, block2) {
     let u1 = block1.xv;
-    block1.xv = ((block1.mass - block2.mass) / (block1.mass + block2.mass) * u1) + ((2 * block2.mass) / (block1.mass + block2.mass) * block2.xv);
-    block2.xv = ((block2.mass - block1.mass) / (block2.mass + block1.mass) * block2.xv) + ((2 * block1.mass) / (block2.mass + block1.mass) * u1);
+    block1.xv =
+        ((block1.mass - block2.mass) / (block1.mass + block2.mass)) * u1 +
+        ((2 * block2.mass) / (block1.mass + block2.mass)) * block2.xv;
+    block2.xv =
+        ((block2.mass - block1.mass) / (block2.mass + block1.mass)) * block2.xv +
+        ((2 * block1.mass) / (block2.mass + block1.mass)) * u1;
 }
