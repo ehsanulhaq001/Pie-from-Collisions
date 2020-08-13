@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script defer src="script.js"></script>
+    <script defer src="block.js"></script>
+    <style>
+        * {
+            margin: 20px;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        canvas {
+            border: solid 1px white;
+        }
+        
+        #col {
+            color: lime;
+            font-size: 30px;
+        }
+        
+        #col span {
+            font-size: 40px;
+        }
+        
+        #pie {
+            color: white;
+            font-size: 50px;
+        }
+        
+        #pie span {
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <span id="col">Collisions &nbsp = <span id="colValue"></span></span>
+
+    <span id="pie">π &nbsp = <span id="pieValue"></span></span>
+</body>
+
+</html>
