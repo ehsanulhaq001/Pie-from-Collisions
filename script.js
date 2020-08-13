@@ -1,23 +1,32 @@
 window.onload = function() {
     cnv = document.querySelector("#canvas");
     ctx = cnv.getContext("2d");
-    cnv.width = 800;
+    cnv.width = window.innerWidth / 2;
     cnv.height = 300;
     cnv.style.backgroundColor = "black";
+    start();
+}
+
+function start() {
     setup();
     requestAnimationFrame(draw);
 }
 let block;
-let bounces = 0;
-let digits = 8;
-let bigMass = Math.pow(100, digits - 1)
-let subDivs = Math.pow(10, (digits < 8 ? digits - 1 : 7));
-let bounceCount = document.querySelector("#colValue");
+let bounces;
+let digits;
+let bigMass;
+let subDivs;
+let bounceCount;
 let pie = document.querySelector("#pieValue");
 
 function setup() {
-    smallBlock = new Block(300, 0, 0, 50, 1);
-    bigBlock = new Block(400, smallBlock.size, -1 / subDivs, 50 + 20 * (digits - 1), bigMass);
+    bounces = 0;
+    digits = document.querySelector("#input").value;;
+    bigMass = Math.pow(100, digits - 1)
+    subDivs = Math.pow(10, (digits < 8 ? digits - 1 : 7));
+    bounceCount = document.querySelector("#colValue");
+    smallBlock = new Block(cnv.width / 2 - 100, 0, 0, 50, 1);
+    bigBlock = new Block(cnv.width / 2, smallBlock.size, -1 / subDivs, 50 + 20 * (digits - 1), bigMass);
 }
 
 function draw() {
@@ -28,11 +37,19 @@ function draw() {
     ctx.fill();
 
     run();
+
     bigBlock.show();
     smallBlock.show();
     bounceCount.innerHTML = bounces;
     pie.innerHTML = bounces / Math.pow(10, digits - 1);
-    requestAnimationFrame(draw);
+
+    if (digits != document.querySelector("#input").value) {
+        digits = document.querySelector("#input").value;
+        document.querySelector("#digits").innerHTML = digits;
+        start();
+    } else {
+        requestAnimationFrame(draw);
+    }
 }
 
 function run() {

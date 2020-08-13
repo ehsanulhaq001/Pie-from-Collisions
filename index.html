@@ -28,6 +28,16 @@
             border: solid 1px white;
         }
         
+        span {
+            color: lime;
+            font-size: 30px;
+        }
+        
+        input {
+            font-size: 30px;
+            width: 100px;
+        }
+        
         #col {
             color: lime;
             font-size: 30px;
@@ -50,8 +60,8 @@
 
 <body>
     <canvas id="canvas"></canvas>
+    <span>Number of Digits <input type="range" id="input" value=10 min="1" max="10"> <span id="digits"></span> </span>
     <span id="col">Collisions &nbsp = <span id="colValue"></span></span>
-
     <span id="pie">π &nbsp = <span id="pieValue"></span></span>
 </body>
 
