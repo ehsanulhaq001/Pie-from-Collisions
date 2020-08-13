@@ -1,7 +1,7 @@
 window.onload = function() {
     cnv = document.querySelector("#canvas");
     ctx = cnv.getContext("2d");
-    cnv.width = window.innerWidth / 2;
+    cnv.width = (window.innerWidth * 3) / 4;
     cnv.height = 300;
     cnv.style.backgroundColor = "black";
     start();
